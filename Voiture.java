@@ -1,4 +1,5 @@
 public class Voiture {
+  // les attributs
   private String marque;
   private String moteur;
   private String numSerie;

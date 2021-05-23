@@ -6,13 +6,13 @@ public class Stock {
   public Stock(){}
 
   public void Ajouter(Voiture v) {
-    // add a car to stockage by the body team
+    // ajouter une voiture dans le stock
     this.stockage[this.nb_voiture_car] = v;
     this.nb_voiture_car++;
   }
 
   public Voiture Retirer() {
-    // return a car from stockage by the motor team
+    // avec ça, l'équipe moteur récupère une voiture déjà créer depuis le stock
     Voiture v = this.stockage[this.nb_voiture_mot];
     this.nb_voiture_mot++;
     return v;

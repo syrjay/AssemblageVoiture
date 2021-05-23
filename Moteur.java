@@ -18,25 +18,27 @@ public class Moteur extends Thread {
     try {
         int i = 0;
       while (i<500) {
-        Voiture v = this.stock.Retirer();
-        int nombreAleatoire = 0 + (int)(Math.random() * ((3 - 0) + 1));
+        Voiture v = this.stock.Retirer(); // récupération d'une voiture depuis le stock
+        int nombreAleatoire = 0 + (int)(Math.random() * ((3 - 0) + 1)); // attribution de couleur et de marque de façon aléatoire
         v.setMarque(this.marqueVoiture[nombreAleatoire]);
-        v.setMoteur("m-"+i);
+        v.setMoteur("m-"+i); // attribution du moteur
         v.setNumSerie("44CDE");
         v.setCouleur(this.Couleur[nombreAleatoire]);
         System.out.println("Le moteur a bien été monté !");
         System.out.println("VOITURE : "+v.getMarque()+" - Numéro de série : "+v.getNumSerie()+"\n");
-        Enregistrer(v);
+        Enregistrer(v); // enregistrement dans un fichier File_auto.txt
         sleep(this.tempsMontageMoteur);
         i++;
       }
       
-    } catch (Exception e) {
-      //TODO: handle exception
+    } catch (InterruptedException e) {
+      System.out.println(e.getMessage());
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 
-   // methode pour l'enregistrement
+   // methode pour l'enregistrement dans un fichier
    public static void Enregistrer(Voiture v) throws IOException {
     File fichier = new File("File_auto.txt");
     FileWriter fw = new FileWriter(fichier, true);
@@ -48,9 +50,11 @@ public class Moteur extends Thread {
     bw.newLine();
     bw.close();
   }
+
+  // génération d'identifiant aléatoire pour les voitures
   public static String randomNumIdentification() {
-    int leftLimit = 48; // numeral '0'
-    int rightLimit = 122; // letter 'z'
+    int leftLimit = 48; // ascii numéro 0 '0'
+    int rightLimit = 122; // ascii lettre 'z'
     int targetStringLength = 10;
     Random random = new Random();
 
